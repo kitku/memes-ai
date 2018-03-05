@@ -1,0 +1,8 @@
+[database]
+driver = mysql
+host = 
+port = 
+schema = 
+username = 
+password = 
+

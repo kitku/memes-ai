@@ -1,3 +1,7 @@
+#PASSWORDS and local config
+config.php
+db.ini
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -99,3 +103,4 @@ ENV/
 
 # mypy
 .mypy_cache/
+
