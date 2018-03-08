@@ -1,0 +1,28 @@
+Table memes (
+	id int() primary key not null,
+	caption varchar(255)
+)
+
+Table labels (
+	id int() not null,
+	label1 bool(),
+	label2 bool(),
+	...
+	labeln bool()
+);
+
+Table traits (
+	id int() not null,
+	trait1 int(),
+	trait2 int(),
+	...
+	traitn int()
+);
+
+Table listoflabels (
+	labelname varchar()
+);
+Table listoftraits (
+	traitname varchar()
+);
+

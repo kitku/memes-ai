@@ -8,7 +8,7 @@ $mysqlPassword = $settings['database']['password'];
 $mysqlHost = 'mysql:host='.$settings['database']['host'].'dbname='.$settings['database']['schema'];
 	
 try {
-	$pdo = newPDO($mysqlHost, $mysqlUser, $mysqlPassword);
+	$pdo = new PDO($mysqlHost, $mysqlUser, $mysqlPassword);
 } catch (PDOException $e) {
 	echo 'Error: '.$e->getMessage();
 }
