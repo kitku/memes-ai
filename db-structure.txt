@@ -22,6 +22,7 @@ Table traits (
 Table listoflabels (
 	labelname varchar()
 );
+
 Table listoftraits (
 	traitname varchar()
 );
