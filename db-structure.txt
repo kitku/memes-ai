@@ -1,5 +1,6 @@
 Table memes (
 	id int() primary key not null,
+	image varchar(100) NOT NULL,
 	caption varchar(255)
 )
 
