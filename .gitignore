@@ -1,6 +1,7 @@
 #PASSWORDS and local config
 config.php
 db.ini
+test*.php
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

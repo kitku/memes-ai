@@ -1,6 +1,12 @@
 <?php
 require 'base.php';
 
+if (isset($_POST['upload'])) {
+	$image = $_FIELS['image']['name'];
+	$image_caption = $_POST['caption'];
+	$target = "images/".basename($image);
+	
+	$stmt = $conn->prepare("INSERT INTO memes VALUES (
 
 ?>
 
