@@ -1,7 +1,13 @@
 <?php
-require 'base.php';
+include 'base.php';
 
 if (isset($_POST['upload'])) {
+	//get last id from db
+	$stmt_lastid = $conn->prepare("SELECT max(id) FROM memes");
+	$stmt_lastid->execute();
+	$result_lastid = $stmt_lastid->fetch(PDO::FETCH_ASSOC);
+	echo $result_lastid['id'];
+	//upload image
 	$image_caption = $_POST['caption'];
 	$target = "images/".basename($_FILES['image']['name']);
 	
