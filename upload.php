@@ -3,15 +3,17 @@ include 'base.php';
 
 if (isset($_POST['upload'])) {
 	//get last id from db
-	$stmt_lastid = $conn->prepare("SELECT max(id) FROM memes");
+	$stmt_lastid = $pdo->prepare("SELECT max(id) as maxid FROM memes");
 	$stmt_lastid->execute();
 	$result_lastid = $stmt_lastid->fetch(PDO::FETCH_ASSOC);
-	echo $result_lastid['id'];
+	$nextid = $result_lastid['maxid']+1;
+	//last id resides in $result_lastid['maxid'], next id in $nextid
 	//upload image
 	$image_caption = $_POST['caption'];
-	$target = "images/".basename($_FILES['image']['name']);
+	$target = "images/".$nextid.".png";
 	
-	if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+	if (imagepng(imagecreatefromstring(file_get_contents($_FILES['image']['tmp_name'])), $target)) {
+	//if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
 		echo "Uploaded Successfully.\n";
 	} else {
 		echo "Upload failed, why?\n";
