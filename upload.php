@@ -21,7 +21,15 @@ if (isset($_POST['upload'])) {
 	echo "<hr><pre>";
 	print_r($_FILES);
 	print "</pre>";
-	//$stmt = $conn->prepare("INSERT INTO memes VALUES (
+	$stmt = $conn->prepare("INSERT INTO memes VALUES (:id, :image, :caption)");
+	$stmt->execute('id'=>$nextid, 'image'=>$_FILES['image']['name'], 'caption'=>$_POST['caption']);
+	/* TODO:
+	-> check for filetype, filesize
+	-> add title box
+	-> redirect to questionarre
+	-> handle empty database table
+	
+	*/
 }
 ?>
 
