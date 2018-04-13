@@ -21,8 +21,12 @@ if (isset($_POST['upload'])) {
 	echo "<hr><pre>";
 	print_r($_FILES);
 	print "</pre>";
-	$stmt = $conn->prepare("INSERT INTO memes VALUES (:id, :image, :caption)");
-	$stmt->execute('id'=>$nextid, 'image'=>$_FILES['image']['name'], 'caption'=>$_POST['caption']);
+	$stmt = $pdo->prepare("INSERT INTO memes VALUES (:id, :image, :caption)");
+	$stmt->bindParam(':id', $nextid);
+	$stmt->bindParam(':image', $_FILES['image']['name']);
+	$stmt->bindParam(':caption', $_POST['caption']);
+	$stmt->execute();
+	//$stmt->execute('id'=>$nextid, 'image'=>$_FILES['image']['name'], 'caption'=>$_POST['caption']);
 	/* TODO:
 	-> check for filetype, filesize
 	-> add title box
