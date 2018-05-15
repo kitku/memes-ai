@@ -13,7 +13,8 @@ else
 	$sqlString = $sqlString . " AND $checklist[$i] = 1";
     }
     include "base.php";
-    $stmt = $pdo->prepare("SELECT image FROM min_memes WHERE $sqlString");
+    //Will this work? If not, review code above
+    $stmt = $pdo->prepare("SELECT image FROM memes JOIN labels ON memes.id=labels.id WHERE $sqlString");
     $stmt->execute();
     while($row = $stmt->fetch())
     {

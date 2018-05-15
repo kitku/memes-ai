@@ -12,6 +12,7 @@ Table labels (
 	labeln bool()
 );
 
+#Not implemented
 Table traits (
 	id int() not null,
 	trait1 int(),
