@@ -1,11 +1,11 @@
 Table memes (
-	id int() primary key not null,
-	image varchar(100) NOT NULL,
+	id int(11) primary key not null,
+	image varchar(50),
 	caption varchar(255)
 )
 
 Table labels (
-	id int() not null,
+	id int(11) not null,
 	label1 bool(),
 	label2 bool(),
 	...

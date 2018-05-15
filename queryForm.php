@@ -14,11 +14,14 @@ else
     }
     include "base.php";
     //Will this work? If not, review code above
-    $stmt = $pdo->prepare("SELECT image FROM memes JOIN labels ON memes.id=labels.id WHERE $sqlString");
+    //UPDATE: It works, but not elegantly
+    //$stmt = $pdo->prepare("SELECT id FROM memes JOIN labels ON memes.id=labels.id WHERE $sqlString");
+    $stmt = $pdo->prepare("SELECT id FROM labels WHERE $sqlString");
     $stmt->execute();
     while($row = $stmt->fetch())
     {
-	echo('<img src="images/' . $row[0] . '" alt="' . $row[0] . '"><br>');
+		//$stmtimg = $pdo->prepare("SELECT id
+		echo('<img src="images/' . $row[0] . '.png" alt="' . $row[0] . '"><br>');
     }
     
 }
