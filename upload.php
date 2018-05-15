@@ -43,12 +43,20 @@ if (isset($_POST['upload'])) {
 	<meta encoding="UTF-8" />
 </head>
 <body>
-<form method="POST" action="upload.php" enctype="multipart/form-data">
-	<input  type="hidden" name="MAX_FILE_SIZE" value="3000000" />
-	<input type="file" name="image" />
-	<textarea id="text" cols="40" rows="4" name="caption"></textarea>
-	<button type="submit" name="upload">Upload!</button>
-</form>
+	<form method="POST" action="upload.php" enctype="multipart/form-data">
+		<input  type="hidden" name="MAX_FILE_SIZE" value="3000000" />
+		<input type="file" name="image" />
+		<textarea id="text" cols="40" rows="4" name="caption"></textarea>
+		<h4>Please fill in the properties of this meme:</h4>
+		
+		
+		<button type="submit" name="upload">Upload!</button>
+	</form>
+	<form method="POST" action="addNewProperty.php">
+		<span>In case your property is missing:</span>
+		<input type="text" name="newPropertyName">
+		<button type="submit" name="updateProperties">Add property!</button>
+	</form>
 </body>
 </html>
 
