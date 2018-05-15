@@ -2,6 +2,7 @@
 config.php
 db.ini
 test*.php
+images/*.png
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
