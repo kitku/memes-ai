@@ -6,10 +6,10 @@ Table memes (
 
 Table labels (
 	id int(11) not null,
-	label1 bool(),
-	label2 bool(),
+	label1 bit() default 'false',
+	label2 bit() default 'false',
 	...
-	labeln bool()
+	labeln bit() default 'false'
 );
 
 #Not implemented
