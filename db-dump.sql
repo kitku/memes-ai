@@ -1,9 +1,3 @@
--- MySQL dump 10.13  Distrib 5.6.39, for Linux (x86_64)
---
--- Host: mysql.staszic.waw.pl    Database: janekjan
--- ------------------------------------------------------
--- Server version	5.5.5-10.1.26-MariaDB-0+deb9u1
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
