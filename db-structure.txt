@@ -24,7 +24,7 @@ Table traits (
 Table listoflabels (
 	labelname varchar()
 );
-
+#not implemented
 Table listoftraits (
 	traitname varchar()
 );
