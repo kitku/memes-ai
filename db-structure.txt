@@ -29,3 +29,8 @@ Table listoftraits (
 	traitname varchar()
 );
 
+Table featured (
+	id int(11) not null,
+	timesShown int(11) default 0
+);
+
