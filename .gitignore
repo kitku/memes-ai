@@ -3,6 +3,7 @@ config.php
 db.ini
 test*.php
 images/*.png
+*.bkp
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

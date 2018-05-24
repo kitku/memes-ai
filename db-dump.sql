@@ -1,3 +1,9 @@
+-- MySQL dump 10.13  Distrib 5.6.39, for Linux (x86_64)
+--
+-- Host: mysql.staszic.waw.pl    Database: janekjan
+-- ------------------------------------------------------
+-- Server version	5.5.5-10.1.26-MariaDB-0+deb9u1
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -10,28 +16,26 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `memes`
+-- Table structure for table `featured`
 --
 
-DROP TABLE IF EXISTS `memes`;
+DROP TABLE IF EXISTS `featured`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `memes` (
+CREATE TABLE `featured` (
   `id` int(11) NOT NULL,
-  `image` varchar(50) DEFAULT NULL,
-  `caption` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `timesShown` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `memes`
+-- Dumping data for table `featured`
 --
 
-LOCK TABLES `memes` WRITE;
-/*!40000 ALTER TABLE `memes` DISABLE KEYS */;
-INSERT INTO `memes` VALUES (0,'','');
-/*!40000 ALTER TABLE `memes` ENABLE KEYS */;
+LOCK TABLES `featured` WRITE;
+/*!40000 ALTER TABLE `featured` DISABLE KEYS */;
+INSERT INTO `featured` VALUES (0,0);
+/*!40000 ALTER TABLE `featured` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -78,6 +82,31 @@ LOCK TABLES `listoflabels` WRITE;
 INSERT INTO `listoflabels` VALUES ('meme');
 /*!40000 ALTER TABLE `listoflabels` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `memes`
+--
+
+DROP TABLE IF EXISTS `memes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `memes` (
+  `id` int(11) NOT NULL,
+  `image` varchar(50) DEFAULT NULL,
+  `caption` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `memes`
+--
+
+LOCK TABLES `memes` WRITE;
+/*!40000 ALTER TABLE `memes` DISABLE KEYS */;
+INSERT INTO `memes` VALUES (0,'','');
+/*!40000 ALTER TABLE `memes` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -88,4 +117,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-18  9:08:41
+-- Dump completed on 2018-05-24 13:21:02
