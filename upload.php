@@ -22,7 +22,7 @@ if (isset($_POST['upload'])) {
 	echo "<hr><pre>";
 	print_r($_FILES);
 	print "</pre>";
-	$stmt = $pdo->prepare("INSERT INTO memes VALUES (:id, :image, :caption)");
+	$stmt = $pdo->prepare("INSERT INTO memes (id, image, caption) VALUES (:id, :image, :caption)");
 	$stmt->bindParam(':id', $nextid);
 	$stmt->bindParam(':image', $_FILES['image']['name']);
 	$stmt->bindParam(':caption', $_POST['caption']);
