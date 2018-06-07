@@ -1,27 +1,17 @@
 Table memes (
-	id int(11) primary key not null,
-	image varchar(50),
-	caption varchar(255)
-)
-
-Table labels (
-	id int(11) not null,
-	label1 bit() default b'0',
-	label2 bit() default b'0',
-	...
-	labeln bit() default b'0''
-);
-
-#How it should be according to olus2000
-Table memes (
   id int(11) primary key not null,
   image varchar(50),
   caption varchar(255),
+ 	timesShown int(11) default 0,
   [labelName1] bit() default b'0',
   [labelName2] bit() default b'0',
   ...
   [labelNameN] bit() default b'0'
+
+Table listoflabels (
+	labelname varchar()
 );
+
 
 #Not implemented
 Table traits (
@@ -32,16 +22,8 @@ Table traits (
 	traitn int()
 );
 
-Table listoflabels (
-	labelname varchar()
-);
-#not implemented
 Table listoftraits (
 	traitname varchar()
 );
 
-Table featured (
-	id int(11) not null,
-	timesShown int(11) default 0
-);
 

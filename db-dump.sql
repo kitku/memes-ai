@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.6.39, for Linux (x86_64)
 --
--- Host: mysql.staszic.waw.pl    Database: janekjan
+-- Host: mysql.staszic.waw.pl    Database: olus2000
 -- ------------------------------------------------------
 -- Server version	5.5.5-10.1.26-MariaDB-0+deb9u1
 
@@ -16,52 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `featured`
---
-
-DROP TABLE IF EXISTS `featured`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `featured` (
-  `id` int(11) NOT NULL,
-  `timesShown` int(11) DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `featured`
---
-
-LOCK TABLES `featured` WRITE;
-/*!40000 ALTER TABLE `featured` DISABLE KEYS */;
-INSERT INTO `featured` VALUES (0,0);
-/*!40000 ALTER TABLE `featured` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `labels`
---
-
-DROP TABLE IF EXISTS `labels`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `labels` (
-  `id` int(11) NOT NULL,
-  `meme` bit(1) DEFAULT b'0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `labels`
---
-
-LOCK TABLES `labels` WRITE;
-/*!40000 ALTER TABLE `labels` DISABLE KEYS */;
-INSERT INTO `labels` VALUES (0,'\0');
-/*!40000 ALTER TABLE `labels` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `listoflabels`
 --
 
@@ -69,7 +23,8 @@ DROP TABLE IF EXISTS `listoflabels`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `listoflabels` (
-  `labelname` varchar(80) DEFAULT NULL
+  `labelname` varchar(80) NOT NULL,
+  PRIMARY KEY (`labelname`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -91,11 +46,13 @@ DROP TABLE IF EXISTS `memes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `memes` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `image` varchar(50) DEFAULT NULL,
   `caption` varchar(255) DEFAULT NULL,
+  `timesShown` int(11) NOT NULL DEFAULT '0',
+  `meme` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,7 +61,7 @@ CREATE TABLE `memes` (
 
 LOCK TABLES `memes` WRITE;
 /*!40000 ALTER TABLE `memes` DISABLE KEYS */;
-INSERT INTO `memes` VALUES (0,'','');
+INSERT INTO `memes` VALUES (1,'','',0,'\0');
 /*!40000 ALTER TABLE `memes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -117,4 +74,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-24 13:21:02
+-- Dump completed on 2018-06-07 10:49:08
