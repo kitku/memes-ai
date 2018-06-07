@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
+		<link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
+		<?php include "topbar.html"; ?>
         <h> Choose labels: </h>
 	<form action="queryForm.php" method="post">
 	<?php
@@ -17,5 +19,6 @@
 	?>    
 	<br><input type="submit" value="Show memes">
 	</form>
+	<?php include "footer.html"; ?>
     </body>
 </html>

@@ -42,8 +42,10 @@ if (isset($_POST['upload'])) {
 <html>
 <head>
 	<meta encoding="UTF-8" />
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+	<?php include "topbar.html"; ?>
 	<form method="POST" action="upload.php" enctype="multipart/form-data">
 		<input  type="hidden" name="MAX_FILE_SIZE" value="3000000" />
 		<input type="file" name="image" />
@@ -56,6 +58,7 @@ if (isset($_POST['upload'])) {
 		<input type="text" name="newPropertyName">
 		<button type="submit" name="updateProperties">Add property!</button>
 	</form>
+	<?php include "footer.html"; ?>
 </body>
 </html>
 
