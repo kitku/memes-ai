@@ -6,10 +6,21 @@ Table memes (
 
 Table labels (
 	id int(11) not null,
-	label1 bit() default 'false',
-	label2 bit() default 'false',
+	label1 bit() default b'0',
+	label2 bit() default b'0',
 	...
-	labeln bit() default 'false'
+	labeln bit() default b'0''
+);
+
+#How it should be according to olus2000
+Table memes (
+  id int(11) primary key not null,
+  image varchar(50),
+  caption varchar(255),
+  [labelName1] bit() default b'0',
+  [labelName2] bit() default b'0',
+  ...
+  [labelNameN] bit() default b'0'
 );
 
 #Not implemented
