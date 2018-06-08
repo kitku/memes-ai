@@ -42,6 +42,7 @@ if (isset($_POST['upload'])) {
 <html>
 <head>
 	<meta encoding="UTF-8" />
+  <title>Upload a meme</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -58,7 +59,6 @@ if (isset($_POST['upload'])) {
 		<input type="text" name="newPropertyName">
 		<button type="submit" name="updateProperties">Add property!</button>
 
-<?php phpinfo();?>
 	</form>
 	<?php include "footer.html"; ?>
 </body>
