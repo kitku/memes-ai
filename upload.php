@@ -55,6 +55,8 @@ if (isset($_POST['upload'])) {
 		<span>In case your property is missing:</span>
 		<input type="text" name="newPropertyName">
 		<button type="submit" name="updateProperties">Add property!</button>
+
+<?php phpinfo();?>
 	</form>
 </body>
 </html>
