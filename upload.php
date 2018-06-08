@@ -52,7 +52,23 @@ if (isset($_POST['upload'])) {
 		<input type="file" name="image" />
 		<textarea id="text" cols="40" rows="4" name="caption" ><?php echo(isset($_POST["caption"]))? $_POST["caption"] : "";?></textarea>
 		<h4>Please fill in the properties of this meme:</h4>
-		
+
+    <?php 
+      
+      $stmt_listOfLabels = $pdo->prepare("SELECT labelname FROM listoflabels;");
+      $stmt_listOfLabels->execute();
+      $label = $stmt_listOfLabels->fetch()[0];
+
+      echo("<table>");
+
+      while ($label) {
+        echo("<tr><td><input type=\"checkbox\" name=\"l".$label."\"</td><td>".$label."</td></tr>");
+        $label = $stmt_listOfLabels->fetch()[0];
+      }
+
+    ?>
+
+    </table>
 		
 		<button type="submit" name="upload">Upload!</button>
 		<span>In case your property is missing:</span>
