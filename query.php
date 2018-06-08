@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
+		<link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
+		<?php include "topbar.html"; ?>
         <h> Choose labels: </h>
 	<form action="queryForm.php" method="post">
 	<?php
 	    include 'base.php';
-	    $stmt = $pdo->prepare('SHOW COLUMNS FROM labels WHERE type="bit(1)"');
+	    $stmt = $pdo->prepare('SHOW COLUMNS FROM memes WHERE type="bit(1)"');
 	    $stmt->execute();
 	    while($label = $stmt->fetchColumn(0))
 	    {
@@ -17,5 +19,6 @@
 	?>    
 	<br><input type="submit" value="Show memes">
 	</form>
+	<?php include "footer.html"; ?>
     </body>
 </html>
