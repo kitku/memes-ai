@@ -13,15 +13,17 @@ if (isset($_POST['upload'])) {
 	$image_caption = $_POST['caption'];
 	$target = "images/".$nextid.".png";
 	
-	if (imagepng(imagecreatefromstring(file_get_contents($_FILES['image']['tmp_name'])), $target)) {
-	//if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-		echo "Uploaded Successfully.\n";
-	} else {
-		echo "Upload failed, why?\n";
-	}
-	echo "<hr><pre>";
-	print_r($_FILES);
-	print "</pre>";
+  if ($_FILES['image']['tmp_name']) {
+	  if (imagepng(imagecreatefromstring(file_get_contents($_FILES['image']['tmp_name'])), $target)) {
+	  //if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+		  echo "Uploaded Successfully.\n";
+	  } else {
+		  echo "Upload failed, why?\n";
+	  }
+  }
+	//echo "<hr><pre>";
+	//print_r($_FILES);
+	//print "</pre>";
 	$stmt = $pdo->prepare("INSERT INTO memes (id, image, caption) VALUES (:id, :image, :caption)");
 	$stmt->bindParam(':id', $nextid);
 	$stmt->bindParam(':image', $_FILES['image']['name']);
@@ -76,6 +78,7 @@ if (isset($_POST['upload'])) {
 		<button type="submit" name="updateProperties">Add property!</button>
 
 	</form>
+  <?//php phpinfo();?>
 	<?php include "footer.html"; ?>
 </body>
 </html>

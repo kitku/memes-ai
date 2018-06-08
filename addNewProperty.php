@@ -13,7 +13,7 @@ if (isset($_POST["newPropertyName"])) {
                                    "WHERE labelname LIKE " . $newLabel);
   $stmt_checkLabel->execute();
   $exists = $stmt_checkLabel->fetch();
-  if (!$exists) {
+  if (!$exists && $newLabel) {
     $stmt_addLabel = $pdo->prepare("ALTER TABLE memes ADD COLUMN " . $newLabel . " " .
                                    "BIT(1) DEFAULT b'0';");
     $stmt_addLabel->execute();
