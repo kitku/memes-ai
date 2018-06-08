@@ -14,7 +14,6 @@ if (isset($_POST["newPropertyName"])) {
   $stmt_checkLabel->execute();
   $exists = $stmt_checkLabel->fetch();
   if (!$exists) {
-    echo("not exists");
     $stmt_addLabel = $pdo->prepare("ALTER TABLE memes ADD COLUMN " . $newLabel . " " .
                                    "BIT(1) DEFAULT b'0';");
     $stmt_addLabel->execute();
