@@ -17,6 +17,7 @@ if (isset($_POST['upload'])) {
 	  if (imagepng(imagecreatefromstring(file_get_contents($_FILES['image']['tmp_name'])), $target)) {
 	  //if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
 		  echo "Uploaded Successfully.\n";
+		  chmod($target, 644);
 	  } else {
 		  echo "Upload failed, why?\n";
 	  }
@@ -29,6 +30,24 @@ if (isset($_POST['upload'])) {
 	$stmt->bindParam(':image', $_FILES['image']['name']);
 	$stmt->bindParam(':caption', $_POST['caption']);
 	$stmt->execute();
+	
+	//Update to set the tags:
+	//$stmt = $pdo->prepare("UPDATE memes SET :label = b'1' WHERE id= :lastid");
+	//$stmt->bindParam(':lastid', $nextid);
+	$stmt_listOfLabels = $pdo->prepare("SELECT labelname FROM listoflabels;");
+    $stmt_listOfLabels->execute();
+	$label = $stmt_listOfLabels->fetch()[0];
+	while ($label) {
+		//print_r("Found ".$label.", ".$_POST[$label]);
+		$labelname = "l".$label;
+		if(isset($_POST[$labelname])) {
+			print_r("Set ".$label."!");
+			$stmt = $pdo->prepare("UPDATE memes SET ".$label."=b'1' WHERE id=".$nextid);
+			//$stmt->bindParam(':label', $label);
+			$stmt->execute();
+		}
+		$label = $stmt_listOfLabels->fetch()[0];
+	}
 	//$stmt->execute('id'=>$nextid, 'image'=>$_FILES['image']['name'], 'caption'=>$_POST['caption']);
 	/* TODO:
 	-> check for filetype, filesize

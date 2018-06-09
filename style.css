@@ -47,6 +47,8 @@ body {
 	font-size: 80%;
 	padding: 14px;
 	margin-top: 14px;
+	float: left;
+	width: 100%
 	
 }
 .footer a:link {
@@ -64,9 +66,23 @@ body {
 
 div.gallery {
 	margin: 5px;
-	background-color: #444;
+	background-color: #4CAF50;
 	float: left;
+	border: 1px solid #ccc;
+	width: 31,5%
 }
+@media only screen and (max-width: 700px) {
+	div.gallery {
+		width: 48%;
+		padding: 0 6px;
+	}
+}
+@media only screen and (max-width: 400px) {
+	div.gallery {
+		width: 90%;
+	}
+}
+
 div.gallery:hover {
     border: 1px solid #777;
 }
