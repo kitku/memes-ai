@@ -12,6 +12,28 @@ Table listoflabels (
 	labelname varchar()
 );
 
+#Propozycja redesignu:
+Table memes (
+  id int(11) not null auto_increment,
+  image varchar(50),
+  caption varchar(255),
+  timesShown int(11) default 0,
+  primary key (id)
+};
+
+Table labels (
+  id int(11) not null auto_increment,
+  name varchar(50), #Nie wiem jaka długość, 50 jest na przykład.
+  primary key (id)
+);
+
+Table memes_labels (
+  meme_id int(11) not null,
+  label_id int(11) not null,
+  foreign key (meme_id) references memes(id),
+  foreign key (label_id) references labels(id),
+  constraint meme_label primary key (meme_id, label_id)
+};
 
 #Not implemented
 Table traits (
