@@ -35,7 +35,9 @@ if(isset($_POST['submit']))
 		{
 			$sqlString = $sqlString . " AND $checklist[$i] = 1";
 		}
-		$stmt = $pdo->prepare("SELECT id, caption FROM memes WHERE $sqlString");
+		$stmt = $pdo->prepare("
+			SELECT id, caption FROM memes WHERE $sqlString;
+			UPDATE memes SET timesShown= timesShown+1 WHERE $sqlString");
 		$stmt->execute();
 		while($row = $stmt->fetch())
 		{
