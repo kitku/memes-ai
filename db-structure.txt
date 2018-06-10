@@ -1,19 +1,4 @@
 Table memes (
-  id int(11) primary key not null,
-  image varchar(50),
-  caption varchar(255),
- 	timesShown int(11) default 0,
-  [labelName1] bit() default b'0',
-  [labelName2] bit() default b'0',
-  ...
-  [labelNameN] bit() default b'0'
-
-Table listoflabels (
-	labelname varchar()
-);
-
-#Propozycja redesignu:
-Table memes (
   id int(11) not null auto_increment,
   image varchar(50),
   caption varchar(255),

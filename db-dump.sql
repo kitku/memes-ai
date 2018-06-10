@@ -16,26 +16,26 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `listoflabels`
+-- Table structure for table `labels`
 --
 
-DROP TABLE IF EXISTS `listoflabels`;
+DROP TABLE IF EXISTS `labels`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `listoflabels` (
-  `labelname` varchar(80) NOT NULL,
-  PRIMARY KEY (`labelname`)
+CREATE TABLE `labels` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `listoflabels`
+-- Dumping data for table `labels`
 --
 
-LOCK TABLES `listoflabels` WRITE;
-/*!40000 ALTER TABLE `listoflabels` DISABLE KEYS */;
-INSERT INTO `listoflabels` VALUES ('meme');
-/*!40000 ALTER TABLE `listoflabels` ENABLE KEYS */;
+LOCK TABLES `labels` WRITE;
+/*!40000 ALTER TABLE `labels` DISABLE KEYS */;
+/*!40000 ALTER TABLE `labels` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -49,10 +49,9 @@ CREATE TABLE `memes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `image` varchar(50) DEFAULT NULL,
   `caption` varchar(255) DEFAULT NULL,
-  `timesShown` int(11) NOT NULL DEFAULT '0',
-  `meme` bit(1) NOT NULL DEFAULT b'0',
+  `timesShown` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,8 +60,33 @@ CREATE TABLE `memes` (
 
 LOCK TABLES `memes` WRITE;
 /*!40000 ALTER TABLE `memes` DISABLE KEYS */;
-INSERT INTO `memes` VALUES (1,'','',0,'\0');
 /*!40000 ALTER TABLE `memes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `memes_labels`
+--
+
+DROP TABLE IF EXISTS `memes_labels`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `memes_labels` (
+  `meme_id` int(11) NOT NULL,
+  `label_id` int(11) NOT NULL,
+  PRIMARY KEY (`meme_id`,`label_id`),
+  KEY `label_id` (`label_id`),
+  CONSTRAINT `memes_labels_ibfk_1` FOREIGN KEY (`meme_id`) REFERENCES `memes` (`id`),
+  CONSTRAINT `memes_labels_ibfk_2` FOREIGN KEY (`label_id`) REFERENCES `labels` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `memes_labels`
+--
+
+LOCK TABLES `memes_labels` WRITE;
+/*!40000 ALTER TABLE `memes_labels` DISABLE KEYS */;
+/*!40000 ALTER TABLE `memes_labels` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -74,4 +98,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-07 10:49:08
+-- Dump completed on 2018-06-10 21:13:01
