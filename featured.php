@@ -3,9 +3,9 @@ that is, it shows memes which are most frequently shown
 in Find Your Favorite
 !-->
 <?php
-//include 'base.php';
-//$featuredMemesAmount = 10;
-$stmt = $pdo->prepare("SELECT id, caption, timesShown FROM memes ORDER BY timesShown DESC LIMIT 10");
+include 'base.php';
+$featuredMemesAmount = 10;
+$stmt = $pdo->prepare("SELECT id, caption FROM memes ORDER BY timesShown DESC LIMIT 10");
 //$stmt->bindParam(':lim', $featuredMemesAmount); //This might be useful for choosing number of featured memes
 $stmt->execute();
 //print_r($stmt);
@@ -15,7 +15,7 @@ while($row = $stmt->fetch()) {
 	echo('<div class="desc">'.$row[1].'</div></div>');
 }
 //phpinfo();
-//include 'end.php';
+include 'end.php';
 
 ?>
 
