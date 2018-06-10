@@ -3,7 +3,11 @@ that is, it shows memes which are most frequently shown
 in Find Your Favorite
 !-->
 <?php
-$featuredMemesAmount = 10;
+if (isset($_POST['numberOfMemes'])) {
+  $featuredMemesAmount = $_POST['numberOfMemes'];
+} else {
+  $featuredMemesAmount = 10;
+}
 $stmt = $pdo->prepare("SELECT id, caption FROM memes ORDER BY timesShown DESC LIMIT 10");
 //$stmt->bindParam(':lim', $featuredMemesAmount); //This might be useful for choosing number of featured memes
 $stmt->execute();
