@@ -6,9 +6,9 @@ if (isset($_POST['upload'])) {
 	//get last id from db
 	$stmt_lastid = $pdo->prepare("SELECT max(id) as maxid FROM memes");
 	$stmt_lastid->execute();
-	$result_lastid = $stmt_lastid->fetch(PDO::FETCH_ASSOC);
-	$nextid = $result_lastid['maxid']+1;
-	//last id resides in $result_lastid['maxid'], next id in $nextid
+	$lastid = $stmt_lastid->fetch(PDO::FETCH_NUM)[0];
+	$nextid = $lastid + 1;
+	//last id resides in $lastid, next id in $nextid
 	//upload image
 	$image_caption = $_POST['caption'];
 	$target = "images/".$nextid.".png";
@@ -16,38 +16,27 @@ if (isset($_POST['upload'])) {
   if ($_FILES['image']['tmp_name']) {
 	  if (imagepng(imagecreatefromstring(file_get_contents($_FILES['image']['tmp_name'])), $target)) {
 	  //if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-		  echo "Uploaded Successfully.\n";
+		  //echo "Uploaded Successfully.\n";
 		  chmod($target, 644);
 	  } else {
-		  echo "Upload failed, why?\n";
+		  //echo "Upload failed, why?\n";
 	  }
-  }
-	//echo "<hr><pre>";
-	//print_r($_FILES);
-	//print "</pre>";
-	$stmt = $pdo->prepare("INSERT INTO memes (id, image, caption) VALUES (:id, :image, :caption)");
-	$stmt->bindParam(':id', $nextid);
-	$stmt->bindParam(':image', $_FILES['image']['name']);
-	$stmt->bindParam(':caption', $_POST['caption']);
-	$stmt->execute();
-	
-	//Update to set the tags:
-	//$stmt = $pdo->prepare("UPDATE memes SET :label = b'1' WHERE id= :lastid");
-	//$stmt->bindParam(':lastid', $nextid);
-	$stmt_listOfLabels = $pdo->prepare("SELECT labelname FROM listoflabels;");
-    $stmt_listOfLabels->execute();
-	$label = $stmt_listOfLabels->fetch()[0];
-	while ($label) {
-		//print_r("Found ".$label.", ".$_POST[$label]);
-		$labelname = "l".$label;
-		if(isset($_POST[$labelname])) {
-			print_r("Set ".$label."!");
-			$stmt = $pdo->prepare("UPDATE memes SET ".$label."=b'1' WHERE id=".$nextid);
-			//$stmt->bindParam(':label', $label);
-			$stmt->execute();
-		}
-		$label = $stmt_listOfLabels->fetch()[0];
-	}
+  
+	  $stmt = $pdo->prepare("INSERT INTO memes (id, image, caption) VALUES (:id, :image, :caption)");
+	  $stmt->bindParam(':id', $nextid);
+	  $stmt->bindParam(':image', $_FILES['image']['name']);
+	  $stmt->bindParam(':caption', $_POST['caption']);
+	  $stmt->execute();
+
+    $stmt_getLabelId = $pdo->prepare("SELECT id FROM labels WHERE name LIKE :labelName;");
+    $stmt_setConnection = $pdo->prepare("INSERT INTO memes_labels VALUES (:memeId, :labelId);");
+    for ($i = 0; $i < count($_POST['labels']); $i++) {
+      $stmt_getLabelId->execute(["labelName"=>$_POST['labels'][$i]]);
+      $labelId = $stmt_getLabelId->fetch()[0];
+      $stmt_setConnection->execute(["labelId"=>$labelId, "memeId"=>$nextid]);
+    }
+	}  
+
 	//$stmt->execute('id'=>$nextid, 'image'=>$_FILES['image']['name'], 'caption'=>$_POST['caption']);
 	/* TODO:
 	-> check for filetype, filesize
@@ -67,7 +56,7 @@ if (isset($_POST['upload'])) {
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<?php include "topbar.html"; ?>
+	<?php include "topbar.html"; ?> 
 	<form method="POST" action="upload.php" enctype="multipart/form-data">
 		<input  type="hidden" name="MAX_FILE_SIZE" value="3000000" />
 		<input type="file" name="image" />
@@ -76,15 +65,15 @@ if (isset($_POST['upload'])) {
 
     <?php 
       
-      $stmt_listOfLabels = $pdo->prepare("SELECT labelname FROM listoflabels;");
-      $stmt_listOfLabels->execute();
-      $label = $stmt_listOfLabels->fetch()[0];
+      $stmt_labels = $pdo->prepare("SELECT name FROM labels;");
+      $stmt_labels->execute();
+      $label = $stmt_labels->fetch()[0];
 
       echo("<table>");
 
       while ($label) {
-        echo("<tr><td><input type=\"checkbox\" name=\"l".$label."\"</td><td>".$label."</td></tr>");
-        $label = $stmt_listOfLabels->fetch()[0];
+        echo("<tr><td><input type=\"checkbox\" name=\"labels[]\" value=\"".$label."\"</td><td>".$label."</td></tr>");
+        $label = $stmt_labels->fetch()[0];
       }
 
     ?>
@@ -97,7 +86,7 @@ if (isset($_POST['upload'])) {
 		<button type="submit" name="updateProperties">Add property!</button>
 
 	</form>
-  <?//php phpinfo();?>
+  <?php //phpinfo();?>
 	<?php include "footer.html"; ?>
 </body>
 </html>

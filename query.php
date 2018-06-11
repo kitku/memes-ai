@@ -10,37 +10,39 @@
 	<h> Choose labels: </h>
 <form action="query.php" method="post">
 <?php
-	$stmt = $pdo->prepare('SHOW COLUMNS FROM memes WHERE type="bit(1)"');
+	$stmt = $pdo->prepare('SELECT name FROM labels;');
 	$stmt->execute();
-	while($label = $stmt->fetchColumn(0))
+  echo('<table>');
+	while($label = $stmt->fetch()[0])
 	{
-		echo "<input type='checkbox' name='checklist[]' value=$label> $label <br>";
+		echo("<tr><td><input type='checkbox' name='labels[]' value=$label></td><td>$label</td></tr>");
 	}
-?>    
+?>
+</table>
 <br><input type="submit" name="submit" value="Show memes">
 </form>
 <?php
 if(isset($_POST['submit'])) 
 {
-	$checklist = $_POST['checklist'];
-	if(empty($checklist))
+	$labels = $_POST['labels'];
+	if(empty($labels))
 	{
 		echo "You didn't choose any labels";
 	}
 	else
 	{
-		$n = count($checklist);
-		$sqlString = "$checklist[0] = 1";
+		$n = count($labels);
+		$sqlString = "l.name LIKE \"$labels[0]\"";
 		for($i=1; $i<$n; $i++)
 		{
-			$sqlString = $sqlString . " AND $checklist[$i] = 1";
+			$sqlString = $sqlString . " OR l.name LIKE \"$labels[$i]\"";
 		}
-		$stmt = $pdo->prepare("
-			SELECT id, caption FROM memes WHERE $sqlString;
-			UPDATE memes SET timesShown= timesShown+1 WHERE $sqlString");
+		$stmt = $pdo->prepare("SELECT m.id, m.caption FROM memes m JOIN memes_labels ml ON m.id=ml.meme_id JOIN labels l ON ml.label_id=l.id WHERE $sqlString GROUP BY m.id HAVING count(*) LIKE {$n};");
 		$stmt->execute();
+		$stmt_updateShown = $pdo->prepare("UPDATE memes SET timesShown=timesShown+1 WHERE id LIKE :id;");
 		while($row = $stmt->fetch())
 		{
+      $stmt_updateShown->execute(["id"=>$row['id']]);
 			echo('<div class="gallery"><a target="_blank" href="images/'.$row[0].'.png"><img src="images/'.$row[0].'.png" alt="'.$row[0].'"></a>');
 			echo('<div class="desc">'.$row[1].'</div></div>');
 		}
