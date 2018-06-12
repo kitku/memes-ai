@@ -65,7 +65,7 @@ if (isset($_POST['upload'])) {
 
     <?php 
       
-      $stmt_labels = $pdo->prepare("SELECT name FROM labels;");
+      $stmt_labels = $pdo->prepare("SELECT name FROM labels ORDER BY name;");
       $stmt_labels->execute();
       $label = $stmt_labels->fetch()[0];
 
