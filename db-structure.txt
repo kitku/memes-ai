@@ -21,16 +21,18 @@ Table memes_labels (
 };
 
 #Not implemented
-Table traits (
-	id int() not null,
-	trait1 int(),
-	trait2 int(),
-	...
-	traitn int()
+Table memes_traits (
+  meme_id int(11) not null,
+  trait_id int(11) not null,
+  foreign key (meme_id) references memes(id),
+  foreign key (trait_id) references traits(id),
+  constraint meme_trait primary key (meme_id, trait_id)
 );
 
-Table listoftraits (
-	traitname varchar()
+Table traits (
+  id int(11) not null primary_key,
+	name varchar(),
+  primary key (trait_id)
 );
 
 
